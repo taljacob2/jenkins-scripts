@@ -2,7 +2,7 @@
 
 ## Jenkins Service
 
-[Jenkins Service/init.groovy.d](/Jenkins%20Service/init.groovy.d/) bundles scripts that run on the "init" hook in Jenkins.
+[Jenkins Service/init.groovy.d](/Jenkins%20Service/init.groovy.d/) bundles scripts to be run by the "init" hook in Jenkins.
 
 > See [Groovy Hook Scripts](https://www.jenkins.io/doc/book/managing/groovy-hook-scripts/#post-initialization-script-init-hook)
 >
@@ -20,7 +20,7 @@ groovy <fileToExecute.groovy>
 
 ## Scripts
 
-[Scripts](/Scripts/) bundles generic scripts, mainly for the operating system.
+[Scripts](/Scripts/) bundles generic scripts, mainly to be run by the operating system.
 
 In Windows, in the Task Scheduler, you can configure a specific script to be run "with highest privilleges", and to be triggered at "logon".
 
