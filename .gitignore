@@ -1,0 +1,11 @@
+# Disable all directories.
+*/
+!.gitignore
+
+# Enable `Jenkins Service/init.groovy.d`.
+!Jenkins Service/
+Jenkins Service/*
+!Jenkins Service/init.groovy.d/
+
+# Enable `Scripts`.
+!Scripts/
