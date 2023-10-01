@@ -8,6 +8,16 @@
 >
 > See [Create Groovy Hook Scripts Jenkins](https://linuxhint.com/create-groovy-hook-scripts-jenkins/)
 
+### Run Groovy Scripts
+
+To run groovy scripts, you need to [download the groovy CLI interpreter](https://groovy.jfrog.io/ui/native/dist-release-local/groovy-windows-installer).
+
+Then you can run a groovy script with:
+
+```
+groovy <fileToExecute.groovy>
+```
+
 ## Scripts
 
 [Scripts](/Scripts/) bundles generic scripts, mainly for the operating system.
