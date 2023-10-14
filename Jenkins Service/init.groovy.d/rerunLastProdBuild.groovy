@@ -3,7 +3,7 @@ import jenkins.model.*
 import hudson.*
 import hudson.model.*
 import org.jenkinsci.plugins.workflow.*
-import BuildRerunner
+import test.buildRerunnerFile
 
 
 // Get all the "production" builds.
@@ -16,5 +16,5 @@ productionBuilds.sort{ it.getTime() }
 productionBuilds = productionBuilds.reverse()
 
 // Rerun the only last "production" build.
-buildRerunner = new BuildRerunner()
+buildRerunner = new test.BuildRerunner()
 buildRerunner.runNewWorkFlowAndEnforceItDoesNotFailWithinGivenTimeFrame(productionBuilds[0])

@@ -3,7 +3,7 @@ import jenkins.model.*
 import hudson.*
 import hudson.model.*
 import org.jenkinsci.plugins.workflow.*
-import BuildRerunner
+import buildRerunnerFile
 
 
 // Get all the builds that are still "in-progress" (i.e. "zombie" builds).

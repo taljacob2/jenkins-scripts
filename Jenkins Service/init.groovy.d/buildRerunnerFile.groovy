@@ -55,3 +55,5 @@ class BuildRerunner {
         }
     }
 }
+
+return this
