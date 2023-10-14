@@ -1,6 +1,6 @@
 # Disable all directories.
-*/
-!.gitignore
+*/*
+# !.gitignore
 
 # Enable `Jenkins Service/init.groovy.d`.
 !Jenkins Service/
@@ -9,3 +9,11 @@ Jenkins Service/*
 
 # Enable `Scripts`.
 !Scripts/
+
+# Enable `Windows/Installation/com/tal/jenkins`.
+
+!Windows/
+Windows/*
+!Windows/Installation/
+Windows/Installation/*
+!Windows/Installation/com

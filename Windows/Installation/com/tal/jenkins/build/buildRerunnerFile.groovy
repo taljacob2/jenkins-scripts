@@ -1,3 +1,5 @@
+package com.tal.jenkins.build
+
 import jenkins.*
 import jenkins.model.*
 import hudson.*
@@ -5,7 +7,7 @@ import hudson.model.*
 import org.jenkinsci.plugins.workflow.*
 
 
-class BuildRerunner {
+public class BuildRerunner {
 
     // A time frame that enforces that the `newWorkflowRun` did not fail during it.
     def ENFORCEMENT_TIME_FRAME = 61 * 60 * 1000
@@ -54,6 +56,10 @@ class BuildRerunner {
             }
         }
     }
+
+    def printTest(){
+        println "hello test"
+    }
 }
 
-return this
+return BuildRerunner.class
