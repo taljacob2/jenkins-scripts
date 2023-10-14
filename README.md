@@ -10,12 +10,29 @@
 
 ### Run Groovy Scripts
 
-To run groovy scripts, you need to [download the groovy CLI interpreter](https://groovy.jfrog.io/ui/native/dist-release-local/groovy-windows-installer).
+To run groovy scripts, you need to [download the groovy CLI interpreter](https://groovy.jfrog.io/ui/native/dist-release-local/groovy-windows-installer) (i.e GroovyShell).
 
 Then you can run a groovy script with:
 
 ```
 groovy <fileToExecute.groovy>
+```
+
+## Windows/Installation (i.e. JENKINS_HOME environment variable)
+
+The JENKINS_HOME path points to this folder.
+
+When running the [Jenkins Script Console](https://www.jenkins.io/doc/book/managing/script-console/) it actually runs a GroovyShell in that folder.
+
+So every package you want to create, its path relates to that folder.
+
+To simulate, and develop a groovy script that runs within that folder (like Jenkins does) then you can run a test script there.
+For example, we created a test script for this purpose: [testScript.groovy](/Windows/Installation/testScript.groovy)
+
+And you can run it by running:
+
+```
+groovy Windows/Installation/testScript.groovy
 ```
 
 ## Scripts
