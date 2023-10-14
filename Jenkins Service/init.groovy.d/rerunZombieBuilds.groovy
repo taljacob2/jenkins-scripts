@@ -92,18 +92,11 @@ def importFile(String relativeFilePathToImport) {
     return evaluate(classFile)
 }
 
-
-def buildRerunner = importFile("com/tal/jenkins/build/buildRerunnerFile.groovy").newInstance()
-
-buildRerunner.printTest()
-println buildRerunner.ENFORCEMENT_TIME_FRAME
-
-
 // Get all the builds that are still "in-progress" (i.e. "zombie" builds).
 runningBuilds = Jenkins.instance.getView('All').getBuilds().findAll() { it.getResult().equals(null) }
 
 // Rerun each build.
-// def buildRerunner = importFile("com/tal/jenkins/build/buildRerunnerFile.groovy").newInstance()
+def buildRerunner = importFile("com/tal/jenkins/build/buildRerunnerFile.groovy").newInstance()
 runningBuilds.each{ build ->
     buildRerunner.runNewWorkFlowAndEnforceItDoesNotFailWithinGivenTimeFrame(build)
 }

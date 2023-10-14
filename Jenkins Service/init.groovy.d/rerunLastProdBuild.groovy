@@ -92,12 +92,6 @@ def importFile(String relativeFilePathToImport) {
     return evaluate(classFile)
 }
 
-
-def buildRerunner = importFile("com/tal/jenkins/build/buildRerunnerFile.groovy").newInstance()
-
-buildRerunner.printTest()
-println buildRerunner.ENFORCEMENT_TIME_FRAME
-
 // Get all the "production" builds.
 productionBuilds = Jenkins.instance.getView('All').getBuilds().findAll() { it.toString().contains("prod") }
 
@@ -108,5 +102,5 @@ productionBuilds.sort{ it.getTime() }
 productionBuilds = productionBuilds.reverse()
 
 // Rerun the only last "production" build.
-// def buildRerunner = importFile("com/tal/jenkins/build/buildRerunnerFile.groovy").newInstance()
+def buildRerunner = importFile("com/tal/jenkins/build/buildRerunnerFile.groovy").newInstance()
 buildRerunner.runNewWorkFlowAndEnforceItDoesNotFailWithinGivenTimeFrame(productionBuilds[0])
