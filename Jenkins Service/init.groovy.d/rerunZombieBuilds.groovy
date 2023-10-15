@@ -1,20 +1,21 @@
-import jenkins.*
-import jenkins.model.*
 import hudson.*
 import hudson.model.*
+import jenkins.*
+import jenkins.model.*
 import org.jenkinsci.plugins.workflow.*
-
 
 def getWORKING_DIRECTORY_PATH() {
     def workingDirectoryPath = ""
 
     try {
         def list = []
-        workingDirectoryPath = new File(getClass().protectionDomain.codeSource.location.path).parent  
-        workingDirectoryPath.eachFileRecurse () { file ->
+        workingDirectoryPath =
+                new File(getClass().protectionDomain.codeSource.location.path).
+                        parent
+        workingDirectoryPath.eachFileRecurse() { file ->
             list << file
         }
-    } catch(e) {
+    } catch (e) {
         workingDirectoryPath = System.getProperty("user.dir")
     }
 
@@ -22,52 +23,55 @@ def getWORKING_DIRECTORY_PATH() {
 }
 
 /**
- * Allows to import a groovy "class" or a groovy "script" to a groovy file, based on its relative file path.
+ * Allows to import a groovy "class" or a groovy "script" to a groovy file,
+ * based on its relative file path.
  *
  * For example, if you want to import a "class":
- * There should be a groovy script in `test/buildRerunnerFile.groovy` that its content is:
+ * There should be a groovy script in `test/buildRerunnerFile.groovy` that its
+ * content is:
  *
  * ```groovy
  * package test
- * 
+ *
  * import jenkins.*
  * import jenkins.model.*
  * import hudson.*
  * import hudson.model.*
  * import org.jenkinsci.plugins.workflow.*
- * 
- * 
+ *
+ *
  * public class BuildRerunner {
  *     def ENFORCEMENT_TIME_FRAME = 61 * 60 * 1000
- * 
+ *
  *     def printTest() {
  *         println "hello test"
  *     }
  * }
- * 
+ *
  * return BuildRerunner.class
- * 
+ *
  * ```
  *
  * For example, if you want to import a "script":
- * There should be a groovy script in `test/buildRerunnerFile.groovy` that its content is:
+ * There should be a groovy script in `test/buildRerunnerFile.groovy` that its
+ * content is:
  *
  * ```groovy
  * package test
- * 
+ *
  * import jenkins.*
  * import jenkins.model.*
  * import hudson.*
  * import hudson.model.*
  * import org.jenkinsci.plugins.workflow.*
- * 
- * 
+ *
+ *
  * def printTest() {
  *     println "hello test"
  * }
- * 
+ *
  * return this
- * 
+ *
  * ```
  *
  * Either way, the usage is the same. This is how you import that groovy file:
@@ -88,15 +92,20 @@ def getWORKING_DIRECTORY_PATH() {
  * @return clazz for a "class" or for a "script".
  */
 def importFile(String relativeFilePathToImport) {
-    def File classFile = new File(getWORKING_DIRECTORY_PATH(), relativeFilePathToImport)
+    File classFile = new File(getWORKING_DIRECTORY_PATH(),
+            relativeFilePathToImport)
     return evaluate(classFile)
 }
 
 // Get all the builds that are still "in-progress" (i.e. "zombie" builds).
-runningBuilds = Jenkins.instance.getView('All').getBuilds().findAll() { it.getResult().equals(null) }
+runningBuilds = Jenkins.instance.getView('All').getBuilds().
+        findAll() { it.getResult().equals(null) }
 
 // Rerun each build.
-def buildRerunner = importFile("com/tal/jenkins/build/buildRerunnerFile.groovy").newInstance()
-runningBuilds.each{ build ->
-    buildRerunner.runNewWorkFlowAndEnforceItDoesNotFailWithinGivenTimeFrame(build)
+def buildRerunner =
+        importFile("com/tal/jenkins/build/buildRerunnerFile.groovy").
+                newInstance()
+runningBuilds.each { build ->
+    buildRerunner.
+            runNewWorkFlowAndEnforceItDoesNotFailWithinGivenTimeFrame(build)
 }

@@ -1,18 +1,13 @@
 package com.tal.jenkins.build
 
-import jenkins.*
-import jenkins.model.*
-import hudson.*
-import hudson.model.*
-import org.jenkinsci.plugins.workflow.*
-
-
-public class BuildRerunner {
+class BuildRerunner {
 
     // A time frame that enforces that the `newWorkflowRun` did not fail during it.
-    def ENFORCEMENT_TIME_FRAME = 61 * 60 * 1000
+    int ENFORCEMENT_TIME_FRAME = 61 * 60 * 1000
 
-    def runNewWorkFlowAndEnforceItDoesNotFailWithinGivenTimeFrame(build, enforcementTimeFrame = ENFORCEMENT_TIME_FRAME) {
+    void runNewWorkFlowAndEnforceItDoesNotFailWithinGivenTimeFrame(build,
+                                                                   enforcementTimeFrame =
+                                                                           ENFORCEMENT_TIME_FRAME) {
         println("rebuilding the old build: " + build.toString())
 
         // Get the `WorkflowJob` that contains this `build`.
@@ -30,14 +25,16 @@ public class BuildRerunner {
          * and try again.
          */
         def thread = Thread.start {
-            while(true) {
+            while (true) {
 
                 // Check in intervals.
                 sleep(10 * 1000)
 
                 // Wait for the `WorkflowRun` to finish, to be able to access the `Build` object.
-                if (!newWorkflowRun.isDone()) { continue; }
-                
+                if (!newWorkflowRun.isDone()) {
+                    continue
+                }
+
                 if (newWorkflowRun.get().getDuration() > enforcementTimeFrame) {
 
                     /*
@@ -48,7 +45,12 @@ public class BuildRerunner {
                 }
 
                 if (newWorkflowRun.get().getResult().equals(Result.FAILURE)) {
-                    println("rebuilding the build: " + newWorkflowRun.get().toString() + " that replaced the old build: " + build.toString() + ", because it ended up in a failure within the `enforcementTimeFrame` (" + enforcementTimeFrame + "ms)")
+                    println("rebuilding the build: " +
+                            newWorkflowRun.get().toString() +
+                            " that replaced the old build: " +
+                            build.toString() +
+                            ", because it ended up in a failure within the `enforcementTimeFrame` (" +
+                            enforcementTimeFrame + "ms)")
 
                     // Create another new `WorkflowRun`, and try again.
                     newWorkflowRun = workflowJob.scheduleBuild2(0)
@@ -57,5 +59,3 @@ public class BuildRerunner {
         }
     }
 }
-
-return BuildRerunner.class
