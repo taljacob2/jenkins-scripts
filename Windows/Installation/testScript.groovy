@@ -87,5 +87,4 @@ def importFile(String relativeFilePathToImport) {
 
 def buildRerunner = importFile("com/tal/jenkins/build/buildRerunnerFile.groovy").newInstance()
 
-buildRerunner.printTest()
 println buildRerunner.ENFORCEMENT_TIME_FRAME

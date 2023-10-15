@@ -56,10 +56,6 @@ public class BuildRerunner {
             }
         }
     }
-
-    def printTest(){
-        println "hello test"
-    }
 }
 
 return BuildRerunner.class
