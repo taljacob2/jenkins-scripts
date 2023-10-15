@@ -32,7 +32,8 @@ For example, we created a test script for this purpose: [testScript.groovy](/Win
 And you can run it by running:
 
 ```
-groovy Windows/Installation/testScript.groovy
+cd Windows/Installation
+groovy testScript.groovy
 ```
 
 ## Scripts
