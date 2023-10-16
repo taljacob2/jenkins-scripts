@@ -1,5 +1,5 @@
-import com.tal.jenkins.build.BuildRerunner
+import com.tal.jenkins.helper.TestClass
 
-final BuildRerunner buildRerunner = new BuildRerunner()
+final TestClass testClass = new TestClass()
 
-println buildRerunner.ENFORCEMENT_TIME_FRAME
+println testClass.returnTest()

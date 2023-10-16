@@ -17,5 +17,5 @@ Windows/*
 Windows/Installation/*
 !Windows/Installation/com
 
-# Enable `Windows/Installation/testScript.groovy`.
-!Windows/Installation/testScript.groovy
+# Enable `Windows/Installation/*.groovy`.
+!Windows/Installation/*.groovy
